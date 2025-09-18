@@ -1,0 +1,1 @@
+ C:\ti\uniflash_9.2.0\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c TMS320F28P550SJ9_LaunchPad.ccxml -e -f -v led_ex1_blinky.out

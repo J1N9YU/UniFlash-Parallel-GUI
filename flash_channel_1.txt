@@ -1,0 +1,35 @@
+DSLite version 20.2.0.3756
+Configuring Debugger (may take a few minutes on first launch)...
+	Initializing Register Database...
+	Initializing: IcePick_C_0
+	Executing Startup Scripts: IcePick_C_0
+	Initializing: C28xx_CPU1
+	Executing Startup Scripts: C28xx_CPU1
+	Initializing: CPU1_CLA1
+	Executing Startup Scripts: CPU1_CLA1
+	Initializing: JLM
+	Executing Startup Scripts: JLM
+Connecting...
+C28xx_CPU1: GEL Output: 
+Memory Map Initialization Complete
+C28xx_CPU1: GEL Output: ... DCSM Initialization Start ... 
+C28xx_CPU1: GEL Output: ... DCSM Initialization Done ...
+C28xx_CPU1: GEL Output: ... DCSM Initialization Start ... 
+C28xx_CPU1: GEL Output: ... DCSM Initialization Done ...
+Loading Program: image\led_ex1_blinky_green.out
+	Preparing ... 
+	.text: 0 of 4 at 0x80000
+C28xx_CPU1: GEL Output: ... DCSM Initialization Start ... 
+C28xx_CPU1: GEL Output: ... DCSM Initialization Done ...
+info: C28xx_CPU1: Warning: Failed unlocking device (zone 1) after reset.
+Erasing Flash
+	Erasing Bank 0
+	Erasing Bank 1: 20%
+	Erasing Bank 2: 40%
+	Erasing Bank 3: 60%
+	Erasing Bank 4: 80%
+	.data: 0 of 1828 at 0x80008
+error: C28xx_CPU1: Error during Flash Programming. Address 0x00080008, FMSTAT (STATCMD on some devices) 0x00000051
+error: C28xx_CPU1: File Loader: Memory write failed: Unknown error
+	Finished
+Failed: File: image\led_ex1_blinky_green.out: Load failed.
