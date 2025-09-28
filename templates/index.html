@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>多路烧录软件</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
     <!-- 1. 替换为本地 Tailwind CSS（删除原 CDN 脚本） -->
-    <!-- <link rel="stylesheet" href="/static/tailwind.css"> -->
+    <link rel="stylesheet" href="/static/tailwind.css">
     
     <!-- 2. 替换为本地 Font Awesome（删除原 CDN 链接） -->
     <link rel="stylesheet" href="/static/font-awesome.css">
@@ -96,6 +96,21 @@
                         <select id="flashFile" class="w-full bg-transparent border-none p-3 focus:outline-none text-sm">
                             <option value="">加载中...</option>
                         </select>
+
+                        <!-- 新增的上传按钮（仅显示这一个按钮） -->
+                        <div class="mt-4">
+                            <button id="uploadFileBtn" class="btn-secondary w-full">
+                                上传
+                            </button>
+                            <!-- 隐藏的文件选择器（确保完全不可见） -->
+                            <input 
+                                type="file" 
+                                id="fileUploader" 
+                                accept=".out,.hex" 
+                                class="hidden absolute -z-10 opacity-0" 
+                                style="display: none !important" 
+                            />
+                        </div>
                     </div>
                     <!-- 新增CRC32显示 -->
                     <div class="bg-gray-50 p-3 rounded-lg border border-gray-200 mt-2 flex items-center">
@@ -104,6 +119,7 @@
                         <span id="fileCrc32" class="font-medium">计算中...</span>
                     </div>
                 </div>
+
                 
                 <!-- 通道数配置 -->
                 <div class="flex flex-col">
@@ -228,7 +244,7 @@
         // 全局变量
         let statusPollInterval;
         let deviceSerials = []; // 存储烧录器序列号
-        let maxFlashCount = 3;  // 最大烧录次数
+        let maxFlashCount = 9999999;  // 最大烧录次数
         let encryptionEnabled = false; // 加密功能开关状态
         
         // DOM 元素
@@ -269,7 +285,7 @@
                 currentChannelsEl.textContent = config.num_channels;
                 
                 // 设置最大烧录次数
-                maxFlashCount = config.max_flash_count || 3;
+                maxFlashCount = config.max_flash_count || 999999;
                 maxFlashCountEl.value = maxFlashCount;
                 
                 // 生成通道卡片
@@ -740,6 +756,47 @@
         
         // 添加文件选择事件监听
         document.getElementById('flashFile').addEventListener('change', changeFlashFile);
+
+        // 上传文件相关功能
+        document.getElementById('uploadFileBtn').addEventListener('click', () => {
+            document.getElementById('fileUploader').click();
+        });
+
+        document.getElementById('fileUploader').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // 验证文件类型
+            if (!file.name.endsWith('.out')) {
+                showToast('请上传.out格式的文件', 'error');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('/api/upload_image', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                showToast(data.message, data.status);
+                
+                if (data.status === 'success') {
+                    // 上传成功后刷新文件列表
+                    await loadImageFiles();
+                    // 清空文件选择器
+                    document.getElementById('fileUploader').value = '';
+                }
+            } catch (error) {
+                console.error('文件上传失败:', error);
+                showToast('文件上传失败', 'error');
+                // 清空文件选择器
+                document.getElementById('fileUploader').value = '';
+            }
+        });
         
         // 显示提示消息
         function showToast(message, type = 'info') {

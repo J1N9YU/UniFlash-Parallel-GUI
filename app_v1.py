@@ -29,8 +29,11 @@ MASTER_CCXML_PATH = r"TMS320F28P550SJ9_LaunchPad.ccxml"
 # 生成的ccxml文件存放目录（自动创建）
 GENERATED_CCXML_DIR = r"generated_ccxml"
 
+# 烧录文件存放目录
+IMAGE_DIR = r"image"
+
 # 要烧录的二进制文件路径（所有通道共用）
-OUT_FILE = r"image\led_ex1_blinky_green.out"
+OUT_FILE = os.path.join(IMAGE_DIR, "led_ex1_blinky_green.out")
 
 # 初始通道数量
 NUM_CHANNELS = 1
@@ -84,6 +87,11 @@ def init_generated_dir():
 
 # 初始化生成目录
 init_generated_dir()
+
+# 确保image目录存在
+if not os.path.exists(IMAGE_DIR):
+    os.makedirs(IMAGE_DIR)
+    app.logger.info(f"创建image目录: {IMAGE_DIR}")
 
 # ======================
 # CRC32计算函数
@@ -566,6 +574,77 @@ def scan():
         "serials": serials,
         "count": len(serials),
         "configured_count": sum(1 for i in range(len(serials)) if CCXML_FILES[i] and os.path.exists(CCXML_FILES[i]))
+    })
+
+# 新增：获取image文件夹内的文件列表
+@app.route('/api/image_files', methods=['GET'])
+def get_image_files():
+    """获取image目录下的所有.out文件列表"""
+    try:
+        if not os.path.exists(IMAGE_DIR):
+            return jsonify({
+                "status": "error",
+                "message": f"image目录不存在: {IMAGE_DIR}"
+            })
+        
+        # 获取目录下所有.out文件
+        out_files = []
+        for file in os.listdir(IMAGE_DIR):
+            if file.endswith(".out") and os.path.isfile(os.path.join(IMAGE_DIR, file)):
+                out_files.append(file)
+        
+        return jsonify({
+            "status": "success",
+            "files": out_files,
+            "current_file": os.path.basename(OUT_FILE)
+        })
+    except Exception as e:
+        app.logger.error(f"获取image文件列表错误: {str(e)}")
+        return jsonify({
+            "status": "error",
+            "message": f"获取文件列表失败: {str(e)}"
+        })
+
+# 新增：更新选中的烧录文件
+@app.route('/api/set_image_file', methods=['POST'])
+def set_image_file():
+    """设置选中的烧录文件"""
+    global OUT_FILE
+    data = request.json
+    
+    if not data or "filename" not in data:
+        return jsonify({
+            "status": "error",
+            "message": "请提供文件名"
+        })
+    
+    filename = data["filename"]
+    new_path = os.path.join(IMAGE_DIR, filename)
+    
+    if not os.path.exists(new_path) or not os.path.isfile(new_path):
+        return jsonify({
+            "status": "error",
+            "message": f"文件不存在: {filename}"
+        })
+    
+    if not filename.endswith(".out"):
+        return jsonify({
+            "status": "error",
+            "message": "请选择.out格式的文件"
+        })
+    
+    # 更新全局变量
+    OUT_FILE = new_path
+    app.logger.info(f"已更新烧录文件为: {OUT_FILE}")
+    
+    # 计算新文件的CRC32
+    crc32 = calculate_file_crc32(OUT_FILE)
+    
+    return jsonify({
+        "status": "success",
+        "message": f"已选择烧录文件: {filename}",
+        "current_file": filename,
+        "out_file_crc32": crc32
     })
 
 # ======================

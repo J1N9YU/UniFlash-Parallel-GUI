@@ -21,7 +21,6 @@ Loading Program: image\led_ex1_blinky_green.out
 	.text: 0 of 4 at 0x80000
 C28xx_CPU1: GEL Output: ... DCSM Initialization Start ... 
 C28xx_CPU1: GEL Output: ... DCSM Initialization Done ...
-info: C28xx_CPU1: Warning: Failed unlocking device (zone 1) after reset.
 Erasing Flash
 	Erasing Bank 0
 	Erasing Bank 1: 20%
@@ -29,7 +28,20 @@ Erasing Flash
 	Erasing Bank 3: 60%
 	Erasing Bank 4: 80%
 	.data: 0 of 1828 at 0x80008
-error: C28xx_CPU1: Error during Flash Programming. Address 0x00080008, FMSTAT (STATCMD on some devices) 0x00000051
-error: C28xx_CPU1: File Loader: Memory write failed: Unknown error
-	Finished
-Failed: File: image\led_ex1_blinky_green.out: Load failed.
+	.text: 0 of 410 at 0x803a0: 14%
+	.text: 0 of 10564 at 0x80470: 17%
+	.data: 0 of 36 at 0x81918: 99%
+	.data: 0 of 16 at 0x81930: 99%
+	Finished: 99%
+	Setting PC to entry point.: 99%
+Verifying Program: image\led_ex1_blinky_green.out
+	Preparing ... 
+	.text: 0 of 4 at 0x80000
+	.data: 0 of 1828 at 0x80008
+	.text: 0 of 410 at 0x803a0: 14%
+	.text: 0 of 10564 at 0x80470: 17%
+	.data: 0 of 36 at 0x81918: 99%
+	.data: 0 of 16 at 0x81930: 99%
+	Finished: 99%
+info: C28xx_CPU1: Program verification successful for image\led_ex1_blinky_green.out
+Success

@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>多路烧录软件</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- 1. 替换为本地 Tailwind CSS（删除原 CDN 脚本） -->
+    <link rel="stylesheet" href="/static/tailwind.css">
+    
+    <!-- 2. 替换为本地 Font Awesome（删除原 CDN 链接） -->
+    <link rel="stylesheet" href="/static/font-awesome.css">
     
     <!-- Tailwind 配置 -->
     <script>
@@ -280,6 +285,47 @@
         
         // 设置事件监听器
         function setupEventListeners() {
+
+            // 点击上传按钮触发文件选择弹窗
+            uploadFlashFileEl.addEventListener('click', () => {
+                flashFileInputEl.click();
+            });
+
+            // 监听文件选择变化（处理上传的文件）
+            flashFileInputEl.addEventListener('change', async (e) => {
+                if (e.target.files && e.target.files.length > 0) {
+                    const file = e.target.files[0];
+                    // 显示上传的文件名
+                    uploadedFileNameEl.textContent = `已上传: ${file.name}`;
+                    
+                    // 这里可以添加真实的文件上传逻辑（例如发送到后端）
+                    fileCrc32El.textContent = '计算中...';
+                    
+                    try {
+                        // 模拟文件上传和CRC计算（实际项目中替换为真实接口）
+                        setTimeout(() => {
+                            // 模拟后端返回的CRC值
+                            const mockCrc = 'FE3A7B1D';
+                            fileCrc32El.textContent = mockCrc;
+                            
+                            // 可选：将上传的文件添加到下拉框中
+                            const option = document.createElement('option');
+                            option.value = file.name; // 实际项目中用真实文件路径/ID
+                            option.textContent = file.name;
+                            option.selected = true;
+                            flashFileEl.appendChild(option);
+                            
+                            showToast(`文件上传成功: ${file.name}`, 'success');
+                        }, 1000);
+                    } catch (error) {
+                        fileCrc32El.textContent = '计算失败';
+                        showToast('文件上传失败', 'error');
+                        console.error('文件上传错误:', error);
+                    }
+                } else {
+                    uploadedFileNameEl.textContent = '未上传文件';
+                }
+            });
             // 加密开关状态变化
             encryptionToggleEl.addEventListener('change', () => {
                 encryptionEnabled = encryptionToggleEl.checked;

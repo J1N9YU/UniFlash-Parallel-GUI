@@ -648,6 +648,77 @@ def set_image_file():
         "out_file_crc32": crc32
     })
 
+# 新增：处理文件上传（不依赖werkzeug）
+@app.route('/api/upload_image', methods=['POST'])
+def upload_image():
+    """处理上传的烧录文件并保存到image目录（仅使用标准库）"""
+    # 检查是否有文件上传
+    if 'file' not in request.files:
+        return jsonify({
+            "status": "error",
+            "message": "未找到上传的文件"
+        })
+    
+    file = request.files['file']
+    
+    # 检查文件名是否为空
+    if file.filename == '':
+        return jsonify({
+            "status": "error",
+            "message": "未选择文件"
+        })
+    
+    # 验证文件类型（.out或.hex）
+    allowed_extensions = ('.out', '.hex')
+    if not file.filename.lower().endswith(allowed_extensions):
+        return jsonify({
+            "status": "error",
+            "message": f"请上传{allowed_extensions}格式的文件"
+        })
+    
+    # 确保image目录存在
+    if not os.path.exists(IMAGE_DIR):
+        os.makedirs(IMAGE_DIR)
+    
+    try:
+        # 自定义安全文件名处理（替代werkzeug的secure_filename）
+        def secure_filename_custom(filename):
+            """过滤文件名中的危险字符，仅保留安全字符"""
+            # 移除路径分隔符和特殊字符
+            filename = re.sub(r'[\\/:"*?<>|]+', '_', filename)
+            # 移除前导/尾随空格和点
+            filename = filename.strip().strip('.')
+            # 确保文件名不为空
+            return filename if filename else f"upload_{int(time.time())}"
+        
+        # 处理文件名
+        filename = secure_filename_custom(file.filename)
+        filepath = os.path.join(IMAGE_DIR, filename)
+        
+        # 避免文件覆盖：如果文件已存在，添加时间戳后缀
+        if os.path.exists(filepath):
+            name, ext = os.path.splitext(filename)
+            timestamp = int(time.time())
+            filename = f"{name}_{timestamp}{ext}"
+            filepath = os.path.join(IMAGE_DIR, filename)
+        
+        # 保存文件
+        file.save(filepath)
+        app.logger.info(f"文件上传成功: {filepath}")
+        
+        return jsonify({
+            "status": "success",
+            "message": f"文件上传成功: {filename}",
+            "filename": filename
+        })
+    except Exception as e:
+        app.logger.error(f"文件上传失败: {str(e)}")
+        return jsonify({
+            "status": "error",
+            "message": f"文件上传失败: {str(e)}"
+        })
+    
+
 # ======================
 # 程序入口
 # ======================
