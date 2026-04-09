@@ -11,6 +11,9 @@ from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS
 import webbrowser
 
+#custom packages
+import device_commands
+
 app = Flask(__name__)
 CORS(app)
 
@@ -19,13 +22,18 @@ CORS(app)
 # ======================
 
 # dslite.exe的路径
-DSLITE_PATH = r"C:\ti\uniflash_9.2.0\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe"
+DSLITE_PATH = r"C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe"
 
 # 设备扫描工具路径
-XDSDFU_PATH = r"C:\ti\uniflash_9.2.0\deskdb\content\TICloudAgent\win\ccs_base\common\uscif\xds110\xdsdfu.exe"
+XDSDFU_PATH = r"C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\common\uscif\xds110\xdsdfu.exe"
 
-# 母版ccxml文件路径（用于复制和修改）
-MASTER_CCXML_PATH = r"TMS320F28P550SJ9_LaunchPad.ccxml"
+# 全局变量：芯片型号与ccxml文件的映射关系（可直接编辑此字典扩展芯片）
+CHIP_CCXML_MAP = {
+    "F28P55": "TMS320F28P550SJ9_LaunchPad.ccxml",
+    "MSPM0G5187": "MSPM0G5187.ccxml"  # 新增的芯片映射
+}
+
+
 
 # 生成的ccxml文件存放目录（自动创建）
 GENERATED_CCXML_DIR = r"generated_ccxml"
@@ -45,6 +53,13 @@ MAX_FLASH_COUNT = 3
 # ======================
 # 全局状态管理
 # ======================
+
+# 选择的芯片信号
+
+TARGET_DEVICE_TYPE = "MSPM0G5187"  # 默认芯片型号，前端可修改
+
+# 母版ccxml文件路径（用于复制和修改）
+MASTER_CCXML_PATH = r"TMS320F28P550SJ9_LaunchPad.ccxml"
 
 # 各通道使用的ccxml文件（动态生成）
 CCXML_FILES = ["" for _ in range(8)]  # 索引0对应通道1，以此类推
@@ -118,11 +133,24 @@ def calculate_file_crc32(file_path):
 # ======================
 # CCXML文件处理函数
 # ======================
+def get_ccxml_file(chip_model: str) -> str:
+    """
+    根据芯片型号获取对应的ccxml文件路径/名称
+    :param chip_model: 芯片型号（如F28P55、MSPM0G5187）
+    :return: 对应的ccxml文件名
+    :raises ValueError: 若芯片型号未配置
+    """
+    if chip_model not in CHIP_CCXML_MAP:
+        raise ValueError(
+            f"芯片型号{chip_model}未配置对应的ccxml文件！\n已配置的芯片：{list(CHIP_CCXML_MAP.keys())}"
+        )
+    return CHIP_CCXML_MAP[chip_model]
 
 def create_ccxml_with_serial(channel, serial):
     """
     根据母版ccxml文件创建带有指定序列号的新文件（文本替换版）
     """
+    app.logger.info(f"创建烧录器系列号CCXML")
     if not os.path.exists(MASTER_CCXML_PATH):
         return False, f"母版ccxml文件不存在: {MASTER_CCXML_PATH}"
     
@@ -224,24 +252,35 @@ def generate_burn_command(ccxml_file, is_encryption_enabled=True):
         "-e", "-f", "-v",
         OUT_FILE
     ]
+
+    series = device_commands.get_chip_series(TARGET_DEVICE_TYPE)
     
     # 如果开启加密，添加额外参数
     if is_encryption_enabled:
+        if series == "C2000":
         # 添加固定的-a参数
-        command_parts.append("-s VerifyAfterProgramLoad=\"No verification\"")
-        command_parts.append("-s FlashResetOnOperation=false")
-        
-        command_parts.append("-b Z1Unlock")
-        # command_parts.append("-b Z1AllProgram")
-        command_parts.append("-a Z1Unlock")
-        command_parts.append("-a Z1PasswordProgram")
-        command_parts.append("-a Z1GRABEXEONLYProgram")
-        
-        
-        # 读取并添加-s参数
-        encryption_params = read_encryption_passwords()
-        for param in encryption_params:
-            command_parts.append(f"-s {param}")
+            command_parts.append("-s VerifyAfterProgramLoad=\"No verification\"")
+            command_parts.append("-s FlashResetOnOperation=false")
+            
+            command_parts.append("-b Z1Unlock")
+            # command_parts.append("-b Z1AllProgram")
+            command_parts.append("-a Z1Unlock")
+            command_parts.append("-a Z1PasswordProgram")
+            command_parts.append("-a Z1GRABEXEONLYProgram")
+            
+            
+            # 读取并添加-s参数
+            encryption_params = read_encryption_passwords()
+            for param in encryption_params:
+                command_parts.append(f"-s {param}")
+
+        elif series == "MSP":
+            # MSP系列的加密参数（示例，需根据实际情况调整）
+            command_parts.append("-s FlashEraseSelection=\"Erase MAIN and NONMAIN necessary sectors only (see warning above)\"")
+
+        else:
+            app.logger.warning(f"未知的芯片系列，无法添加加密参数: {TARGET_DEVICE_TYPE}")
+            
     
     # 拼接成完整命令
     return ' '.join(command_parts)
@@ -441,6 +480,19 @@ def scan_devices():
 def index():
     """前端页面"""
     return render_template('index.html')
+
+
+# 设置芯片型号（写入全局变量）
+@app.route('/api/set_chip_type', methods=['POST'])
+def set_chip_type():
+    global TARGET_DEVICE_TYPE
+    chip_type = request.json.get("chip_type")
+    
+    if chip_type not in CHIP_CCXML_MAP:
+        return jsonify({"status": "error"})
+    
+    TARGET_DEVICE_TYPE = chip_type
+    return jsonify({"status": "success"})
 
 @app.route('/api/config', methods=['GET'])
 def get_config():
@@ -731,6 +783,8 @@ if __name__ == '__main__':
     if not os.path.exists(OUT_FILE):
         app.logger.warning(f"烧录文件未找到: {OUT_FILE}")
     
+    MASTER_CCXML_PATH = get_ccxml_file(TARGET_DEVICE_TYPE)  # 获取母版ccxml文件路径
+
     if not os.path.exists(MASTER_CCXML_PATH):
         app.logger.error(f"母版ccxml文件不存在: {MASTER_CCXML_PATH} - 请检查配置")
     

@@ -1,47 +1,22 @@
-DSLite version 20.2.0.3756
+DSLite version 20.4.0.3973
 Configuring Debugger (may take a few minutes on first launch)...
 	Initializing Register Database...
-	Initializing: IcePick_C_0
-	Executing Startup Scripts: IcePick_C_0
-	Initializing: C28xx_CPU1
-	Executing Startup Scripts: C28xx_CPU1
-	Initializing: CPU1_CLA1
-	Executing Startup Scripts: CPU1_CLA1
-	Initializing: JLM
-	Executing Startup Scripts: JLM
+	Initializing: CS_DAP_0
+	Executing Startup Scripts: CS_DAP_0
+	Initializing: CORTEX_M0P
+	Executing Startup Scripts: CORTEX_M0P
+	Initializing: SEC_AP
+	Executing Startup Scripts: SEC_AP
 Connecting...
-C28xx_CPU1: GEL Output: 
-Memory Map Initialization Complete
-C28xx_CPU1: GEL Output: ... DCSM Initialization Start ... 
-C28xx_CPU1: GEL Output: ... DCSM Initialization Done ...
-C28xx_CPU1: GEL Output: ... DCSM Initialization Start ... 
-C28xx_CPU1: GEL Output: ... DCSM Initialization Done ...
-Loading Program: image\led_ex1_blinky_green.out
+CORTEX_M0P: GEL Output: Memory Map Initialization Complete
+Loading Program: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
 	Preparing ... 
-	.text: 0 of 4 at 0x80000
-C28xx_CPU1: GEL Output: ... DCSM Initialization Start ... 
-C28xx_CPU1: GEL Output: ... DCSM Initialization Done ...
-Erasing Flash
-	Erasing Bank 0
-	Erasing Bank 1: 20%
-	Erasing Bank 2: 40%
-	Erasing Bank 3: 60%
-	Erasing Bank 4: 80%
-	.data: 0 of 1828 at 0x80008
-	.text: 0 of 410 at 0x803a0: 14%
-	.text: 0 of 10564 at 0x80470: 17%
-	.data: 0 of 36 at 0x81918: 99%
-	.data: 0 of 16 at 0x81930: 99%
-	Finished: 99%
-	Setting PC to entry point.: 99%
-Verifying Program: image\led_ex1_blinky_green.out
+	PT_LOAD[0]: 0 of 528 at 0x0
+	Finished
+	Setting PC to entry point.
+Verifying Program: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
 	Preparing ... 
-	.text: 0 of 4 at 0x80000
-	.data: 0 of 1828 at 0x80008
-	.text: 0 of 410 at 0x803a0: 14%
-	.text: 0 of 10564 at 0x80470: 17%
-	.data: 0 of 36 at 0x81918: 99%
-	.data: 0 of 16 at 0x81930: 99%
-	Finished: 99%
-info: C28xx_CPU1: Program verification successful for image\led_ex1_blinky_green.out
+	PT_LOAD[0]: 0 of 528 at 0x0
+	Finished
+info: CORTEX_M0P: Program verification successful for image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
 Success

@@ -120,6 +120,19 @@
                     </div>
                 </div>
 
+                <!-- 新增芯片型号选择框 -->
+                <div class="flex flex-col">
+                    <label class="text-gray-600 mb-2 font-medium">芯片型号</label>
+                    <div class="bg-gray-50 p-0 rounded-lg border border-gray-200 flex items-center">
+                        <select id="chipType" class="w-full bg-transparent border-none p-3 focus:outline-none text-sm">
+                            <option value="">请选择芯片型号</option>
+                            <option value="F28P55">F28P55</option>
+                            <option value="MSPM0G5187">MSPM0G5187</option>
+                            <!-- 可根据实际需求扩展更多芯片型号 -->
+                        </select>
+                    </div>
+                </div>
+
                 
                 <!-- 通道数配置 -->
                 <div class="flex flex-col">
@@ -266,10 +279,25 @@
         const remainingFlashesEl = document.getElementById('remainingFlashes');
         const encryptionToggleEl = document.getElementById('encryptionToggle');
         
+        // 初始化芯片型号（如需从后端加载默认值可添加此逻辑）
+        async function initChipType() {
+            try {
+                // 示例：从后端获取当前配置的芯片型号
+                // const config = await fetchConfig();
+                // if (config && config.chip_type) {
+                //     document.getElementById('chipType').value = config.chip_type;
+                // }
+            } catch (error) {
+                console.error('加载芯片型号失败:', error);
+            }
+        }
         // 初始化页面
         async function init() {
             // 加载可用的烧录文件
             await loadImageFiles();
+
+            await initChipType();
+
             
             // 获取初始配置
             const config = await fetchConfig();
@@ -291,6 +319,8 @@
                 // 生成通道卡片
                 generateChannelCards(config.num_channels);
             }
+
+            
             
             // 加载初始状态
             await updateStatus();
@@ -425,6 +455,28 @@
                     stopStatusPolling();
                     // 更新状态
                     await updateStatus();
+                }
+            });
+
+            // 芯片型号选择变化事件
+            document.getElementById('chipType').addEventListener('change', async () => {
+                const chipType = document.getElementById('chipType').value;
+                if (!chipType) return;
+
+                try {
+                    // 发送选中的芯片型号到后端保存
+                    const res = await fetch('/api/set_chip_type', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chip_type: chipType })
+                    });
+                    const data = await res.json();
+                    
+                    data.status === 'success' 
+                        ? showToast(`已选择芯片: ${chipType}`, 'success') 
+                        : showToast('保存失败', 'error');
+                } catch (err) {
+                    showToast('保存芯片型号失败', 'error');
                 }
             });
         }
