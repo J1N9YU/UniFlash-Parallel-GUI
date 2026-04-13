@@ -11,12 +11,16 @@ Connecting...
 CORTEX_M0P: GEL Output: Memory Map Initialization Complete
 Loading Program: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
 	Preparing ... 
-	PT_LOAD[0]: 0 of 528 at 0x0
-	Finished
-	Setting PC to entry point.
+	PT_LOAD[0]: 0 of 520 at 0x0
+	PT_LOAD[2]: 0 of 184 at 0x41c00000: 65%
+	PT_LOAD[3]: 0 of 96 at 0x41c00100: 88%
+	Finished: 88%
+	Setting PC to entry point.: 88%
 Verifying Program: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
 	Preparing ... 
-	PT_LOAD[0]: 0 of 528 at 0x0
-	Finished
+	PT_LOAD[0]: 0 of 520 at 0x0
+	PT_LOAD[2]: 0 of 184 at 0x41c00000: 65%
+	PT_LOAD[3]: 0 of 96 at 0x41c00100: 88%
+	Finished: 88%
 info: CORTEX_M0P: Program verification successful for image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
 Success

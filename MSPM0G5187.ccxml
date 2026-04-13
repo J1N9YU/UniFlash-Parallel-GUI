@@ -21,6 +21,16 @@
             </property>
             <platform XML_version="1.2" id="platform_0">
                 <instance XML_version="1.2" desc="MSPM0G5187" href="devices/MSPM0G5187.xml" id="MSPM0G5187" xml="MSPM0G5187.xml" xmlpath="devices"/>
+                <device XML_version="1.2" id="MSPM0G5187" partnum="MSPM0G5187" HW_revision="1" description="ARM Cortex-M0 Plus MCU">
+                    <property id="MSPM0SWDPassword0" Type="numericfield" Value="305419896"/>
+                    <property id="MSPM0SWDPassword1" Type="numericfield" Value="305419896"/>
+                    <property id="MSPM0SWDPassword2" Type="numericfield" Value="305419896"/>
+                    <property id="MSPM0SWDPassword3" Type="numericfield" Value="305419896"/>
+		    <property id="MSPM0SWDPassword4" Type="numericfield" Value="305419896"/>
+		    <property id="MSPM0SWDPassword5" Type="numericfield" Value="305419896"/>
+		    <property id="MSPM0SWDPassword6" Type="numericfield" Value="305419896"/>
+		    <property id="MSPM0SWDPassword7" Type="numericfield" Value="305419896"/>
+                </device>
             </platform>
         </connection>
     </configuration>

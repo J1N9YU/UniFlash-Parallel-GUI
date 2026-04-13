@@ -1,0 +1,149 @@
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe noConnectFlash -c generated_ccxml\channel_1_serial_MG020001.ccxml -O AutomaticFactoryReset 
+ C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe noConnectFlash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v image\led_ex1_blinky_green.out -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)"
+正在烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe noConnectFlash -c generated_ccxml\channel_1_serial_MG020001.ccxml -O AutomaticFactoryReset 
+ C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe noConnectFlash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v image\led_ex1_blinky_green.out -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)"
+通道 1 未找到ccxml文件: 
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+通道 1 未找到ccxml文件: 
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe noConnectFlash -c generated_ccxml\channel_1_serial_MG020001.ccxml -O AutomaticFactoryReset 
+
+正在烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe noConnectFlash -c generated_ccxml\channel_1_serial_MG020001.ccxml -O AutomaticFactoryReset 
+
+正在烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe noConnectFlash -c generated_ccxml\channel_1_serial_MG020001.ccxml -O AutomaticFactoryReset 
+
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe noConnectFlash -c generated_ccxml\channel_1_serial_MG020001.ccxml -O AutomaticFactoryReset 
+
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v image\led_ex1_blinky_green.out
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" 
+
+正在烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" 
+
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out 
+
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out 
+
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out 
+
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang_1776070220.out 
+
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out 
+
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out 
+
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out 
+
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在工厂复位MSP系列芯片
+通道 1 执行工厂复位命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -O AutomaticFactoryReset
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在工厂复位MSP系列芯片
+通道 1 执行工厂复位命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -O AutomaticFactoryReset
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
+已更新烧录文件为: image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
+创建烧录器系列号CCXML
+已生成通道 1 的ccxml文件: generated_ccxml\channel_1_serial_MG020001.ccxml (序列号: MG020001)
+通道 1 已关联序列号: MG020001
+正在工厂复位MSP系列芯片
+通道 1 执行工厂复位命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe noConnectFlash -c generated_ccxml\channel_1_serial_MG020001.ccxml -O AutomaticFactoryReset
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out
+正在工厂复位MSP系列芯片
+通道 1 执行工厂复位命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe noConnectFlash -c generated_ccxml\channel_1_serial_MG020001.ccxml -O AutomaticFactoryReset
+正在加密烧录MSP系列芯片
+通道 1 执行命令: C:\ti\uniflash_9.4.1\deskdb\content\TICloudAgent\win\ccs_base\DebugServer\bin\dslite.exe flash -c generated_ccxml\channel_1_serial_MG020001.ccxml -e -f -v -s FlashEraseSelection="Erase MAIN and NONMAIN necessary sectors only (see warning above)" image\gpio_toggle_output_LP_MSPM0G5187_nortos_ticlang.out

@@ -10,6 +10,7 @@ from xml.etree import ElementTree as ET
 from flask import Flask, render_template, jsonify, request
 from flask_cors import CORS
 import webbrowser
+import logging
 
 #custom packages
 import device_commands
@@ -236,6 +237,30 @@ def _check_success_flag(output_file):
         app.logger.error(f"检查成功标志时发生错误: {str(e)}")
         return False
 
+def generate_factoryreset_command(ccxml_file, is_encryption_enabled=True):
+
+    series = device_commands.get_chip_series(TARGET_DEVICE_TYPE)
+    command_parts = []
+    # 如果开启加密，添加额外参数
+    if is_encryption_enabled: 
+        if series == "MSP":
+            app.logger.warning(f"正在工厂复位MSP系列芯片")
+            command_parts = [
+                DSLITE_PATH,
+                "noConnectFlash",
+                "-c", ccxml_file,
+                "-O",
+                "AutomaticFactoryReset",
+            ]
+            
+        else:
+            pass
+    else:
+        pass
+
+    return ' '.join(command_parts)
+
+
 def generate_burn_command(ccxml_file, is_encryption_enabled=True):
     """
     生成烧录命令
@@ -244,16 +269,36 @@ def generate_burn_command(ccxml_file, is_encryption_enabled=True):
     :param is_encryption_enabled: 加密开关状态
     :return: 完整烧录命令字符串
     """
-    # 基础命令部分
-    command_parts = [
-        DSLITE_PATH,
-        "flash",
-        "-c", ccxml_file,
-        "-e", "-f", "-v",
-        OUT_FILE
-    ]
-
+    # 获取芯片系列
     series = device_commands.get_chip_series(TARGET_DEVICE_TYPE)
+    
+    # 基础命令部分
+    if series == "C2000":
+        command_parts = [
+            DSLITE_PATH,
+            "flash",
+            "-c", ccxml_file,
+            "-e", "-f", "-v",
+            OUT_FILE
+        ]
+    elif series == "MSP":
+        command_parts = [
+            DSLITE_PATH,
+            "flash",
+            "-c", ccxml_file,
+            "-e", "-f", "-v",
+            OUT_FILE
+        ]
+    else:
+        command_parts = [
+            DSLITE_PATH,
+            "flash",
+            "-c", ccxml_file,
+            "-e", "-f", "-v",
+            OUT_FILE
+        ]
+            
+
     
     # 如果开启加密，添加额外参数
     if is_encryption_enabled:
@@ -275,8 +320,23 @@ def generate_burn_command(ccxml_file, is_encryption_enabled=True):
                 command_parts.append(f"-s {param}")
 
         elif series == "MSP":
-            # MSP系列的加密参数（示例，需根据实际情况调整）
-            command_parts.append("-s FlashEraseSelection=\"Erase MAIN and NONMAIN necessary sectors only (see warning above)\"")
+            app.logger.warning(f"正在加密烧录MSP系列芯片")
+            command_parts = [
+                # DSLITE_PATH,
+                # "flash",
+                # "-c", ccxml_file,
+                # "-O",
+                # "AutomaticFactoryReset",
+                # "\n"
+                DSLITE_PATH,
+                "flash",
+                "-c", ccxml_file,
+                "-e", "-f", "-v",
+                "-s FlashEraseSelection=\"Erase MAIN and NONMAIN necessary sectors only (see warning above)\"",
+                OUT_FILE
+            ]
+
+         
 
         else:
             app.logger.warning(f"未知的芯片系列，无法添加加密参数: {TARGET_DEVICE_TYPE}")
@@ -305,7 +365,14 @@ def _run_dslite(channel, encryption_enabled):
             channel_status[channel] = "烧录中"
             is_running = True
         
-        # 构建命令
+        
+        # 构建工厂复位命令（如果需要）
+        factory_reset_cmd = generate_factoryreset_command(ccxml_file, encryption_enabled)
+        if(len(factory_reset_cmd) > 0):
+            app.logger.info(f"通道 {channel} 执行工厂复位命令: {factory_reset_cmd}")
+            subprocess.run(factory_reset_cmd, shell=True, timeout=120)
+        
+        # 构建烧录命令
         cmd = generate_burn_command(ccxml_file, encryption_enabled)
         
         app.logger.info(f"通道 {channel} 执行命令: {cmd}")
@@ -747,12 +814,12 @@ def upload_image():
         filename = secure_filename_custom(file.filename)
         filepath = os.path.join(IMAGE_DIR, filename)
         
-        # 避免文件覆盖：如果文件已存在，添加时间戳后缀
-        if os.path.exists(filepath):
-            name, ext = os.path.splitext(filename)
-            timestamp = int(time.time())
-            filename = f"{name}_{timestamp}{ext}"
-            filepath = os.path.join(IMAGE_DIR, filename)
+        # # 避免文件覆盖：如果文件已存在，添加时间戳后缀
+        # if os.path.exists(filepath):
+        #     name, ext = os.path.splitext(filename)
+        #     timestamp = int(time.time())
+        #     filename = f"{name}_{timestamp}{ext}"
+        #     filepath = os.path.join(IMAGE_DIR, filename)
         
         # 保存文件
         file.save(filepath)
@@ -776,6 +843,11 @@ def upload_image():
 # ======================
 
 if __name__ == '__main__':
+    # 输出日志到文件
+    app.logger.setLevel(logging.INFO)
+    file_handler = logging.FileHandler("app.log", encoding="utf-8")
+    app.logger.addHandler(file_handler)
+    
     # 验证关键文件是否存在
     if not os.path.exists(DSLITE_PATH):
         app.logger.warning(f"dslite.exe 未找到: {DSLITE_PATH}")
@@ -798,4 +870,4 @@ if __name__ == '__main__':
     
     # 启动一个线程执行打开浏览器的操作（避免阻塞服务启动）
     threading.Thread(target=open_browser, daemon=True).start()     
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    app.run(host='0.0.0.0', port=5000, debug=True)
